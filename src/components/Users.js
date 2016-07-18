@@ -18,12 +18,19 @@ class Users extends React.Component {
 
   componentDidMount() {
     var self = this;
-    $.getJSON('/data.json').done(function (data) {
-      //userList = data.list;
-      self.setState({
-        list : data.list
-      });
-    });
+    
+    if(this.props.list.length == 0){
+        $.getJSON('/data.json').done(function (data) {
+          //userList = data.list;
+          self.setState({
+            list : data.list
+          });
+        });
+    } else{
+        self.setState({
+            list: self.props.list
+        });
+    }
   }
 
   render() {
